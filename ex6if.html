@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+조건부 렌더링을 위한 v-if 연습
+<hr>
+<div id="app">
+    <p v-if="season">여름 조아</p>
+    <p v-else>겨울 시러</p>
+    <button @click="season = !season" class="btn btn-success">결과 바꾸기</button>
+
+    <!-- 조건, 반복 렌더링을 할 때 유용한 특수 html tag -->
+    <template v-if="season">
+        <p>옷 입기 편함</p>
+        <p>벌레 ㅡ ㅡ</p>
+    </template>
+    <template v-else>
+        <p>벌레 ㅂ ㅂ</p>
+        <p>이쁜 옷</p>
+        <p>눈 옴</p>
+    </template>
+    <br>
+    <span v-show="season">
+        <p>여름🥵</p>
+    </span>
+    <!-- v-if, v-show 차이 -->
+    <p v-if="season">여름🥵 - false인 경우 코드가 제거</p>
+    <p v-show="season">여름🥵 - false인 경우 display:none</p>
+    <hr>
+    <label><input type="checkbox" v-model="myVisiable" />체크박스</label>
+    <p v-if="myVisiable">Check on</p>
+    <p v-else>Check off</p>
+
+    <!-- count 값에 따른 조건부 렌더링 -->
+    <p v-if="count === 10">{{count}}번 클릭</p>
+    <p v-else-if="count >= 1">현재 클릭 횟수 : {{count}}</p>
+    <p v-else>버튼 클릭 ㄱ ㄱ</p>
+    <button v-bind:disabled="count === 10" @click="addFunc">숫자 늘림</button>
+</div>
+<script>
+    const {createApp} = Vue;
+
+    createApp({
+        data() {
+            return {
+                season:true,    // true(여름), false(겨울)
+                myVisiable:false, // checkbox 상태 초기화 
+                count:0
+            };
+        },
+        methods: {
+            addFunc() {
+                this.count++;
+            }
+        },
+    }).mount('#app');
+</script>
+</body>
+</html>

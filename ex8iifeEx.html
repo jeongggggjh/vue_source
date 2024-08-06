@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문제</title>
+    <script src="https://unpkg.com/vue@3"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>성적 관리</h1>
+      <form @submit.prevent="addScore">
+        이름 : <input type="text" v-model="name" /><br />
+        자바 : <input type="number" v-model="java" /><br />
+        리액트: <input type="number" v-model="react" /><br />
+        뷰 : <input type="number" v-model="vue" /><br />
+        <button type="submit">확인</button>
+      </form>
+
+      <div class="result">
+        <h2>입력 결과</h2>
+        <ul>
+          <li v-for="student in students">
+            {{ student.name }} : {{ student.java }}, {{ student.react }}, {{ student.vue }} 총점 : {{ student.total }}
+          </li>
+        </ul>
+      </div>
+      <div class="total">
+        <h2>전체 통계</h2>
+        인원수 : {{ students.length }} 전체 총점 : {{ totalScore }}
+      </div>
+    </div>
+
+    <script src="ex8jsEx.js"></script>
+  </body>
+</html>
